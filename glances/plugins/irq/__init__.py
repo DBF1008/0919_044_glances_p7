@@ -13,7 +13,7 @@ import os
 
 from glances.globals import LINUX
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 from glances.timer import getTimeSinceLastUpdate
 
 # Fields description
@@ -33,7 +33,7 @@ fields_description = {
 }
 
 
-class IrqPlugin(GlancesPluginModel):
+class IrqPlugin(GlancesPlugin):
     """Glances IRQ plugin.
 
     stats is a list
@@ -53,8 +53,8 @@ class IrqPlugin(GlancesPluginModel):
         """Return the key of the list."""
         return self.irq.get_key()
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the IRQ stats."""
         # Init new stats

@@ -14,7 +14,7 @@ from urllib.request import Request, urlopen
 
 from glances.globals import get_ip_address, json_loads, urlopen_auth
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -45,7 +45,7 @@ fields_description = {
 }
 
 
-class IpPlugin(GlancesPluginModel):
+class IpPlugin(GlancesPlugin):
     """Glances IP Plugin.
 
     stats is a dict
@@ -126,8 +126,8 @@ class IpPlugin(GlancesPluginModel):
 
         return stats
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update IP stats using the input method.
 

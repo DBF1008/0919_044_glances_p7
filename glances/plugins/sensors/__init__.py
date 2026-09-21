@@ -17,7 +17,7 @@ import psutil
 from glances.globals import natural_keys, to_fahrenheit
 from glances.logger import logger
 from glances.outputs.glances_unicode import unicode_message
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 from glances.plugins.sensors.sensor.glances_batpercent import BatpercentPlugin
 from glances.plugins.sensors.sensor.glances_hddtemp import HddtempPlugin
 from glances.timer import Counter
@@ -61,7 +61,7 @@ fields_description = {
 }
 
 
-class SensorsPlugin(GlancesPluginModel):
+class SensorsPlugin(GlancesPlugin):
     """Glances sensors plugin.
 
     The stats list includes both sensors and hard disks stats, if any.
@@ -137,8 +137,8 @@ class SensorsPlugin(GlancesPluginModel):
         # Sort by label
         return sorted(stats_transformed, key=lambda d: natural_keys(d['label']))
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update sensors stats using the input method."""
         # Init new stats

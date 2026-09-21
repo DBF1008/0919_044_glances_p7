@@ -11,7 +11,7 @@
 import datetime
 from time import strftime, tzname
 
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -25,7 +25,7 @@ fields_description = {
 }
 
 
-class NowPlugin(GlancesPluginModel):
+class NowPlugin(GlancesPlugin):
     """Plugin to get the current date/time.
 
     stats is a dict:

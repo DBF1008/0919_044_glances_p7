@@ -11,7 +11,7 @@
 import psutil
 
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -62,7 +62,7 @@ items_history_list = [
 ]
 
 
-class NetworkPlugin(GlancesPluginModel):
+class NetworkPlugin(GlancesPlugin):
     """Glances network plugin.
 
     stats is a list
@@ -105,8 +105,8 @@ class NetworkPlugin(GlancesPluginModel):
         """Return the key of the list."""
         return 'interface_name'
 
-    # @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    # @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update network stats using the input method.
 
@@ -127,7 +127,7 @@ class NetworkPlugin(GlancesPluginModel):
 
         return self.stats
 
-    @GlancesPluginModel._manage_rate
+    @GlancesPlugin._manage_rate
     def update_local(self):
         # Update stats using the standard system lib
 

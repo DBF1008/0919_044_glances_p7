@@ -16,7 +16,7 @@ from glances.globals import WINDOWS, key_exist_value_not_none_not_v, replace_spe
 from glances.logger import logger
 from glances.outputs.glances_unicode import unicode_message
 from glances.plugins.core import CorePlugin
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 from glances.processes import glances_processes, sort_stats
 
 # Fields description
@@ -116,7 +116,7 @@ def split_cmdline(bare_process_name, cmdline):
     return path, cmd, arguments
 
 
-class ProcesslistPlugin(GlancesPluginModel):
+class ProcesslistPlugin(GlancesPlugin):
     """Glances' processes plugin.
 
     stats is a list

@@ -19,7 +19,7 @@ from glances.plugins.containers.engines import ContainersExtension
 from glances.plugins.containers.engines.docker import DockerExtension, disable_plugin_docker
 from glances.plugins.containers.engines.lxd import LxdExtension, disable_plugin_lxd
 from glances.plugins.containers.engines.podman import PodmanExtension, disable_plugin_podman
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 from glances.processes import glances_processes
 from glances.processes import sort_stats as sort_stats_processes
 
@@ -138,7 +138,7 @@ sort_for_human = {
 }
 
 
-class ContainersPlugin(GlancesPluginModel):
+class ContainersPlugin(GlancesPlugin):
     """Glances Docker plugin.
 
     stats is a dict: {'version': {...}, 'containers': [{}, {}]}
@@ -236,8 +236,8 @@ class ContainersPlugin(GlancesPluginModel):
             return False
         return all_tag[0].lower() == 'true'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self) -> list[dict]:
         """Update Docker and podman stats using the input method."""
         # Connection should be ok

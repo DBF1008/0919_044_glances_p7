@@ -17,7 +17,7 @@ import threading
 
 from glances.globals import to_ascii
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Import plugin specific dependency
 try:
@@ -30,7 +30,7 @@ else:
     import_error_tag = False
 
 
-class CloudPlugin(GlancesPluginModel):
+class CloudPlugin(GlancesPlugin):
     """Glances' cloud plugin.
 
     The goal of this plugin is to retrieve additional information
@@ -72,8 +72,8 @@ class CloudPlugin(GlancesPluginModel):
         # Call the father class
         super().exit()
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the cloud stats.
 

@@ -12,7 +12,7 @@ from copy import deepcopy
 from typing import Any
 
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 from glances.plugins.vms.engines import VmsExtension
 from glances.plugins.vms.engines.multipass import VmExtension as MultipassVmExtension
 from glances.plugins.vms.engines.virsh import VmExtension as VirshVmExtension
@@ -91,7 +91,7 @@ sort_for_human = {
 }
 
 
-class VmsPlugin(GlancesPluginModel):
+class VmsPlugin(GlancesPlugin):
     """Glances Vm plugin.
 
     stats is a dict: {'version': '', 'vms': [{}, {}]}
@@ -158,8 +158,8 @@ class VmsPlugin(GlancesPluginModel):
             return False
         return all_tag[0].lower() == 'true'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self) -> list[dict]:
         """Update VMs stats using the input method."""
         # Connection should be ok
@@ -173,7 +173,7 @@ class VmsPlugin(GlancesPluginModel):
         self.sort_key, self.stats = sort_vm_stats(stats)
         return self.stats
 
-    @GlancesPluginModel._manage_rate
+    @GlancesPlugin._manage_rate
     def update_local(self):
         """Update stats localy"""
         stats = []

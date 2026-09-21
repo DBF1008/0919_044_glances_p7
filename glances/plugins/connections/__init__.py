@@ -12,7 +12,7 @@ import psutil
 
 from glances.globals import nativestr
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -68,7 +68,7 @@ fields_description = {
 #                        'y_unit': 'bit/s'}]
 
 
-class ConnectionsPlugin(GlancesPluginModel):
+class ConnectionsPlugin(GlancesPlugin):
     """Glances connections plugin.
 
     stats is a dict
@@ -146,8 +146,8 @@ class ConnectionsPlugin(GlancesPluginModel):
 
         return stats
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update connections stats using the input method.
 

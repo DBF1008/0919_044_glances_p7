@@ -13,7 +13,7 @@ import psutil
 from glances.cpu_percent import cpu_percent
 from glances.globals import LINUX, MACOS
 from glances.plugins.core import CorePlugin
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # https://github.com/nicolargo/glances/wiki/How-to-create-a-new-plugin-%3F#create-the-plugin-script
@@ -145,7 +145,7 @@ items_history_list = [
 ]
 
 
-class CpuPlugin(GlancesPluginModel):
+class CpuPlugin(GlancesPlugin):
     """Glances CPU plugin.
 
     'stats' is a dictionary that contains the system-wide CPU utilization as a
@@ -167,8 +167,8 @@ class CpuPlugin(GlancesPluginModel):
         except Exception:
             self.nb_log_core = 1
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update CPU stats using the input method."""
         # Grab stats into self.stats
@@ -182,7 +182,7 @@ class CpuPlugin(GlancesPluginModel):
 
         return self.stats
 
-    @GlancesPluginModel._manage_rate
+    @GlancesPlugin._manage_rate
     def update_local(self):
         """Update CPU stats using psutil."""
         # Grab CPU stats using psutil's cpu_percent and cpu_times_percent

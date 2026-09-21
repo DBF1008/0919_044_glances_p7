@@ -14,7 +14,7 @@ import platform
 import re
 
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # {
 #   "os_name": "Linux",
@@ -107,7 +107,7 @@ def _linux_os_release():
     return pretty_name
 
 
-class SystemPlugin(GlancesPluginModel):
+class SystemPlugin(GlancesPlugin):
     """Glances' host/system plugin.
 
     stats is a dict
@@ -196,8 +196,8 @@ class SystemPlugin(GlancesPluginModel):
 
         return stats
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the host/system info using the input method.
 

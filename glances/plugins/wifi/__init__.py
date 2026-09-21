@@ -20,7 +20,7 @@ import operator
 
 from glances.globals import file_exists, nativestr
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Use stats available in the /proc/net/wireless file
 # Note: it only give signal information about the current hotspot
@@ -50,7 +50,7 @@ fields_description = {
 }
 
 
-class WifiPlugin(GlancesPluginModel):
+class WifiPlugin(GlancesPlugin):
     """Glances Wifi plugin.
 
     Get stats of the current Wifi hotspots.
@@ -80,8 +80,8 @@ class WifiPlugin(GlancesPluginModel):
         """
         return 'ssid'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update Wifi stats using the input method.
 

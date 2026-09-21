@@ -11,7 +11,7 @@
 import psutil
 
 from glances.plugins.fs.zfs import zfs_enable, zfs_stats
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 fields_description = {
@@ -115,7 +115,7 @@ snmp_oid = {
 items_history_list = [{'name': 'percent', 'description': 'RAM memory usage', 'y_unit': '%'}]
 
 
-class MemPlugin(GlancesPluginModel):
+class MemPlugin(GlancesPlugin):
     """Glances' memory plugin.
 
     stats is a dict
@@ -256,9 +256,9 @@ class MemPlugin(GlancesPluginModel):
 
         return stats
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
-    @GlancesPluginModel._manage_mmm
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
+    @GlancesPlugin._manage_mmm
     def update(self):
         """Update RAM memory stats using the input method."""
         init = self.get_init_value()

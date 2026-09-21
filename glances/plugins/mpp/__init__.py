@@ -14,7 +14,7 @@ Currently supported:
 
 from glances.logger import logger
 from glances.plugins.mpp.cards.rockchip_mpp import RockchipMPP
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 fields_description = {
@@ -46,7 +46,7 @@ items_history_list = [
 ]
 
 
-class MppPlugin(GlancesPluginModel):
+class MppPlugin(GlancesPlugin):
     """Glances MPP plugin.
 
     stats is a list of dictionaries with one entry per MPP engine.
@@ -81,8 +81,8 @@ class MppPlugin(GlancesPluginModel):
         """Return the key of the list."""
         return 'engine_id'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the MPP stats."""
         stats = self.get_init_value()

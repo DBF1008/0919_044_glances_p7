@@ -10,7 +10,7 @@
 
 from glances.cpu_percent import cpu_percent
 from glances.globals import BSD, LINUX, MACOS, WINDOWS
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -94,7 +94,7 @@ items_history_list = [
 ]
 
 
-class PercpuPlugin(GlancesPluginModel):
+class PercpuPlugin(GlancesPlugin):
     """Glances per-CPU plugin.
 
     'stats' is a list of dictionaries that contain the utilization percentages
@@ -124,8 +124,8 @@ class PercpuPlugin(GlancesPluginModel):
         """Return the key of the list."""
         return 'cpu_number'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update per-CPU stats using the input method."""
         # Grab per-CPU stats using psutil's

@@ -8,7 +8,7 @@
 
 """Process count plugin."""
 
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 from glances.processes import glances_processes, sort_for_human
 
 # Fields description
@@ -49,7 +49,7 @@ items_history_list = [
 ]
 
 
-class ProcesscountPlugin(GlancesPluginModel):
+class ProcesscountPlugin(GlancesPlugin):
     """Glances process count plugin.
 
     stats is a list
@@ -74,8 +74,8 @@ class ProcesscountPlugin(GlancesPluginModel):
         """Disable extended stats."""
         glances_processes.disable_extended()
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update processes stats using the input method."""
         # Update the stats
