@@ -14,7 +14,7 @@ import psutil
 
 from glances.logger import logger
 from glances.plugins.core import CorePlugin
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 fields_description = {
@@ -73,7 +73,7 @@ else:
         nb_phys_core = core['phys']
 
 
-class LoadPlugin(GlancesPluginModel):
+class LoadPlugin(GlancesPlugin):
     """Glances load plugin.
 
     stats is a dict
@@ -88,8 +88,8 @@ class LoadPlugin(GlancesPluginModel):
         # We want to display the stat in the curse interface
         self.display_curse = True
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update load stats."""
         # Init new stats

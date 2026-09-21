@@ -18,7 +18,7 @@ from functools import partial, reduce
 
 from glances.globals import BSD, MACOS, WINDOWS, bool_type
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 from glances.ports_list import GlancesPortsList
 from glances.timer import Counter
 from glances.web_list import GlancesWebList
@@ -67,7 +67,7 @@ fields_description = {
 }
 
 
-class PortsPlugin(GlancesPluginModel):
+class PortsPlugin(GlancesPlugin):
     """Glances ports scanner plugin."""
 
     def __init__(self, args=None, config=None):
@@ -99,8 +99,8 @@ class PortsPlugin(GlancesPluginModel):
         """Return the key of the list."""
         return 'indice'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the ports list."""
         if self.input_method == 'local':

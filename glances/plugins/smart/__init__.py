@@ -37,7 +37,7 @@ If smartmontools is not installed, we should catch the error upstream in plugin 
 from glances.globals import is_admin
 from glances.logger import logger
 from glances.main import disable
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Import plugin specific dependency
 try:
@@ -184,7 +184,7 @@ def get_smart_data(hide_attributes):
     return stats
 
 
-class SmartPlugin(GlancesPluginModel):
+class SmartPlugin(GlancesPlugin):
     """Glances' HDD SMART plugin."""
 
     def __init__(self, args=None, config=None, stats_init_value=[]):
@@ -217,8 +217,8 @@ class SmartPlugin(GlancesPluginModel):
         """Set hide_attributes list"""
         self._hide_attributes = list(attr_list)
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update SMART stats using the input method."""
         # Init new stats

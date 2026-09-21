@@ -10,7 +10,7 @@
 
 import psutil
 
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 fields_description = {
@@ -23,7 +23,7 @@ physical cores multiplied by the number of threads that can run on each core.',
 }
 
 
-class CorePlugin(GlancesPluginModel):
+class CorePlugin(GlancesPlugin):
     """Glances CPU core plugin.
 
     Get stats about CPU core number.
@@ -40,8 +40,8 @@ class CorePlugin(GlancesPluginModel):
         self.display_curse = False
 
     # Do *NOT* uncomment the following line
-    # @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    # @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update core stats.
 

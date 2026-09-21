@@ -12,7 +12,7 @@ import psutil
 
 from glances.globals import nativestr
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -69,7 +69,7 @@ items_history_list = [
 ]
 
 
-class DiskioPlugin(GlancesPluginModel):
+class DiskioPlugin(GlancesPlugin):
     """Glances disks I/O plugin.
 
     stats is a list
@@ -105,8 +105,8 @@ class DiskioPlugin(GlancesPluginModel):
         """Return the key of the list."""
         return 'disk_name'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update disk I/O stats using the input method."""
         # Update the stats
@@ -140,7 +140,7 @@ class DiskioPlugin(GlancesPluginModel):
 
         return stats
 
-    @GlancesPluginModel._manage_rate
+    @GlancesPlugin._manage_rate
     def update_local(self):
         stats = self.get_init_value()
 

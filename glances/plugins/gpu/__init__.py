@@ -28,7 +28,7 @@ from glances.plugins.gpu.cards.amd import AmdGPU
 from glances.plugins.gpu.cards.arm import ArmGPU
 from glances.plugins.gpu.cards.intel import IntelGPU
 from glances.plugins.gpu.cards.nvidia import NvidiaGPU
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -69,7 +69,7 @@ items_history_list = [
 ]
 
 
-class GpuPlugin(GlancesPluginModel):
+class GpuPlugin(GlancesPlugin):
     """Glances GPU plugin.
 
     stats is a list of dictionaries with one entry per GPU
@@ -142,8 +142,8 @@ class GpuPlugin(GlancesPluginModel):
         """Return the key of the list."""
         return 'gpu_id'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the GPU stats."""
         # Init new stats

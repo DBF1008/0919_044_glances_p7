@@ -12,7 +12,7 @@ from glances.events_list import glances_events
 from glances.folder_list import FolderList as glancesFolderList
 from glances.globals import nativestr
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -49,7 +49,7 @@ fields_description = {
 }
 
 
-class FoldersPlugin(GlancesPluginModel):
+class FoldersPlugin(GlancesPlugin):
     """Glances folder plugin."""
 
     def __init__(self, args=None, config=None):
@@ -69,8 +69,8 @@ class FoldersPlugin(GlancesPluginModel):
         """Return the key of the list."""
         return 'path'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the folders list."""
         # Init new stats

@@ -12,13 +12,13 @@ from datetime import datetime, timedelta
 
 import psutil
 
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # SNMP OID
 snmp_oid = {'_uptime': '1.3.6.1.2.1.1.3.0'}
 
 
-class UptimePlugin(GlancesPluginModel):
+class UptimePlugin(GlancesPlugin):
     """Glances uptime plugin.
 
     stats is date (string)
@@ -46,8 +46,8 @@ class UptimePlugin(GlancesPluginModel):
         # Correct issue #1092 (thanks to @IanTAtWork)
         return {'seconds': int(self.uptime.total_seconds())}
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update uptime stat using the input method."""
         # Init new stats

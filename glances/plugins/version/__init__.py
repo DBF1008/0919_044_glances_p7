@@ -11,10 +11,10 @@ Just a simple plugin to get the Glances version.
 """
 
 from glances import __version__ as glances_version
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 
-class VersionPlugin(GlancesPluginModel):
+class VersionPlugin(GlancesPlugin):
     """Get the Glances versions.
 
     stats is a string
@@ -30,8 +30,8 @@ class VersionPlugin(GlancesPluginModel):
         """Reset/init the stats."""
         self.stats = None
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the stats."""
         # Reset stats

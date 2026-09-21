@@ -15,10 +15,10 @@ Just a stupid plugin to display the help screen.
 from itertools import chain
 
 from glances import __version__, psutil_version
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 
-class HelpPlugin(GlancesPluginModel):
+class HelpPlugin(GlancesPlugin):
     """Glances help plugin."""
 
     def __init__(self, args=None, config=None):

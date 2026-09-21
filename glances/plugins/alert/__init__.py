@@ -12,7 +12,7 @@ from datetime import datetime
 from functools import reduce
 
 from glances.events_list import glances_events
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # {
 #     "begin": "begin",
@@ -91,7 +91,7 @@ fields_description = {
 }
 
 
-class AlertPlugin(GlancesPluginModel):
+class AlertPlugin(GlancesPlugin):
     """Glances alert plugin.
 
     Only for display.

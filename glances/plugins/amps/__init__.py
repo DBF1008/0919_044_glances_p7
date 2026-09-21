@@ -9,7 +9,7 @@
 """Monitor plugin."""
 
 from glances.amps_list import AmpsList as glancesAmpsList
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -28,7 +28,7 @@ fields_description = {
 }
 
 
-class AmpsPlugin(GlancesPluginModel):
+class AmpsPlugin(GlancesPlugin):
     """Glances AMPs plugin."""
 
     def __init__(self, args=None, config=None):
@@ -47,8 +47,8 @@ class AmpsPlugin(GlancesPluginModel):
         """Return the key of the list."""
         return 'name'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the AMP list."""
         # Init new stats

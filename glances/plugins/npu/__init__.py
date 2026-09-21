@@ -18,7 +18,7 @@ from glances.logger import logger
 from glances.plugins.npu.cards.amd import AmdNPU
 from glances.plugins.npu.cards.intel import IntelNPU
 from glances.plugins.npu.cards.rockchip import RockchipNPU
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -80,7 +80,7 @@ items_history_list = [
 ]
 
 
-class NpuPlugin(GlancesPluginModel):
+class NpuPlugin(GlancesPlugin):
     """Glances NPU plugin.
 
     stats is a list of dictionaries with one entry per NPU
@@ -134,8 +134,8 @@ class NpuPlugin(GlancesPluginModel):
         """Return the key of the list."""
         return 'npu_id'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the NPU stats."""
         # Init new stats

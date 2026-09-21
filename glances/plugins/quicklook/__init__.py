@@ -17,7 +17,7 @@ from glances.outputs.glances_bars import Bar
 from glances.outputs.glances_sparklines import Sparkline
 from glances.plugins.fs.zfs import zfs_enable, zfs_stats
 from glances.plugins.load import load_average, log_core, phys_core
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -83,7 +83,7 @@ items_history_list = [
 ]
 
 
-class QuicklookPlugin(GlancesPluginModel):
+class QuicklookPlugin(GlancesPlugin):
     """Glances quicklook plugin.
 
     'stats' is a dictionary.
@@ -117,8 +117,8 @@ class QuicklookPlugin(GlancesPluginModel):
         if "gpu_proc" in self.stats_list:
             gpu_stats.get_gpu_proc = True
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update quicklook stats using the input method."""
         # Init new stats

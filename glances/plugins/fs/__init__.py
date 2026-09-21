@@ -14,7 +14,7 @@ import psutil
 
 from glances.globals import PermissionError, exit_after, nativestr, u
 from glances.logger import logger
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 # Fields description
 # description: human readable description
@@ -99,7 +99,7 @@ def get_disk_usage(fs):
         return None
 
 
-class FsPlugin(GlancesPluginModel):
+class FsPlugin(GlancesPlugin):
     """Glances file system plugin.
 
     stats is a list
@@ -122,8 +122,8 @@ class FsPlugin(GlancesPluginModel):
         """Return the key of the list."""
         return 'mnt_point'
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the FS stats using the input method."""
         # Update the stats

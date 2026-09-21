@@ -10,7 +10,7 @@
 
 import psutil
 
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 from glances.timer import getTimeSinceLastUpdate
 
 # Fields description
@@ -50,7 +50,7 @@ snmp_oid = {
 items_history_list = [{'name': 'percent', 'description': 'Swap memory usage', 'y_unit': '%'}]
 
 
-class MemswapPlugin(GlancesPluginModel):
+class MemswapPlugin(GlancesPlugin):
     """Glances swap memory plugin.
 
     stats is a dict
@@ -65,8 +65,8 @@ class MemswapPlugin(GlancesPluginModel):
         # We want to display the stat in the curse interface
         self.display_curse = True
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update swap memory stats using the input method."""
         # Init new stats

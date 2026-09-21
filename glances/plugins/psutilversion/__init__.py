@@ -10,10 +10,10 @@
 Just a simple plugin to get the Psutil version."""
 
 from glances import psutil_version_info
-from glances.plugins.plugin.model import GlancesPluginModel
+from glances.plugins.plugin import GlancesPlugin
 
 
-class PsutilversionPlugin(GlancesPluginModel):
+class PsutilversionPlugin(GlancesPlugin):
     """Get the Psutil version.
 
     stats is a string
@@ -29,8 +29,8 @@ class PsutilversionPlugin(GlancesPluginModel):
         """Reset/init the stats."""
         self.stats = None
 
-    @GlancesPluginModel._check_decorator
-    @GlancesPluginModel._log_result_decorator
+    @GlancesPlugin._check_decorator
+    @GlancesPlugin._log_result_decorator
     def update(self):
         """Update the stats."""
         # Reset stats
