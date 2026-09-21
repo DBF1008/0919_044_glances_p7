@@ -14,7 +14,7 @@ Can be unit tested independently from the other plugin responsibilities.
 
 import copy
 
-from glances.globals import list_to_dict
+from glances.globals import list_to_dict, listkeys
 from glances.logger import logger
 
 
@@ -54,9 +54,9 @@ class StatsStorageMixin:
     def keys(self):
         """Return the keys of the stats."""
         if isinstance(self.stats, dict):
-            return list(self.stats.keys())
+            return listkeys(self.stats)
         if isinstance(self.stats, list):
-            return list(list_to_dict(self.stats).keys())
+            return listkeys(list_to_dict(self.stats))
         return []
 
     def get(self, item, default=None):
